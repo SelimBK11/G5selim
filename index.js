@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Define the array as a variable outside the component
 const list = [
   {
     title: "React",
@@ -19,27 +20,44 @@ const list = [
   },
 ];
 
+// Extract the List component into a new function
+function List() {
+  return (
+    <ul>
+      {list.map(function (item) {
+        return (
+          <li key={item.objectID}>
+            <span>
+              <a href={item.url}>{item.title}</a>
+            </span>
+            <span> {item.author}</span>
+            <span> {item.num_comments}</span>
+            <span> {item.points}</span>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+// Extract the Search component into a new function
+function Search() {
+  return (
+    <div>
+      <label htmlFor="search">Search: </label>
+      <input id="search" type="text" />
+    </div>
+  );
+}
+
+// Define the App component and instantiate List and Search components
 function App() {
   return (
     <div>
       <h1>My Hacker Stories</h1>
-      <label htmlFor="search">Search: </label>
-      <input id="search" type="text" />
+      <Search />
       <hr />
-      <ul>
-        {list.map(function (item) {
-          return (
-            <li key={item.objectID}>
-              <span>
-                <a href={item.url}>{item.title}</a>
-              </span>
-              <span> {item.author}</span>
-              <span> {item.num_comments}</span>
-              <span> {item.points}</span>
-            </li>
-          );
-        })}
-      </ul>
+      <List />
     </div>
   );
 }
